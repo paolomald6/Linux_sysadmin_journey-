@@ -1,0 +1,28 @@
+# Physical Machines
+Here are the physical machines available in my lab, along with their hardware specifications.
+
+## Machine 01 – Raspberry Pi 4 Model B
+
+- Manufacturer: Raspberry Pi Ltd
+- Model: Raspberry Pi 4 Model B
+- CPU: Broadcom BCM2711
+- RAM: 4 GB
+- Storage: MicroSD card 32 GB
+-  Operating System:
+
+## Machine 02 – Workstation
+
+- Manufacturer: HP
+- Model: 
+- CPU: Intel Core I5-9500
+- RAM: 16 G
+- Storage: 250 GB
+- Operating System: Proxmox VE 9.2
+
+## Machine 03 – Laptop
+- Manufacturer: Lenovo
+- Model: P15s
+- CPU: Intel Core I7-1165G7
+- RAM: 32 GB
+- Storage: 500 GB
+- Operating System: Windows 11 
