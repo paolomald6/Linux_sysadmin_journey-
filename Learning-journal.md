@@ -4,7 +4,7 @@
 - **Fixed:** Used an Ubuntu machine and the dd command to write the Proxmox ISO directly to the USB flash drive
 - **Learned:** How to install Proxmox VE, create bootable USB installation using dd, pveproxy (Web server for Administration interface).
 
-## 2026-11-19 · Session S1: Lab Hardware Inventory & Git Setup
+## 2026-11-14 · Session S1: Lab Hardware Inventory & Git Setup
 - **Done:** Checked the hardware specifications of each lab machine, created the Git repository, created the Hardware Overview directory, and documented the hardware specifications in 01-physical-machines.md
 - **Broken:** Nothing
 - **Fixed:** Nothing
