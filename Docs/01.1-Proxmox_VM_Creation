@@ -1,0 +1,27 @@
+# Proxmox VE – Virtual Machine Creation
+
+## Goal
+Create a RHEL 10 virtual machine on Proxmox VE.
+
+## Environment
+- Hypervisor: Proxmox VE 9.2-1
+
+## Steps
+1. Downloaded the RHEL 10 ISO using `wget`.
+2. Created a VM using the Proxmox CLI (`qm create`).
+4. Checked the VM configuration using `qm config 300`.
+5. Started the VM using `qm start 300`.
+6. Opened the VM console through the Proxmox web interface.
+
+## Choices made
+- CPU type: `x86-64-v3`
+- VM ID: 300
+
+## Problems and fixes
+- VM failed to boot with the default `kvm` CPU type.
+- Changed the CPU type to `x86-64-v3` through the Proxmox web interface.
+- VM boot issue resolved.
+
+## Check
+- `qm config 300` displays the VM configuration.
+- `qm list` displays the VM status.
