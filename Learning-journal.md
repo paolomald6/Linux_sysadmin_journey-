@@ -1,3 +1,10 @@
+
+## 2026-11-17 · Session S4: Proxmox VM Configuration & Red Hat 10 Installation
+- **Done:** Deleted and recreated the virtual machine to improve the `qm create` command, configured CPU cores, network bridge, virtual disk using VirtIO, and set the CPU type to `x86-64-v3`. Installed Red Hat Enterprise Linux 10 and registered the system with Red Hat Subscription Manager. Downloaded the Debian ISO for the next virtual machine (wget)
+- **Broken:** The initial VM creation commands I used yesterday, did not configure all the required parameters correctly, making it necessary for me to check on the GUI to get the VM running.
+- **Fixed:** Refined the `qm create` command to configure the VM correctly from the start, including CPU type, core count, network bridge, and VirtIO disk
+- **Learned:** How CPU cores and threads work together to allocate CPU resources efficiently to a virtual machine, how to register Red Hat Enterprise Linux 10 using Subscription Manager. And digging `qm create options`
+  
 ## 2026-11-16 · Session S3: First Proxmox VM – Red Hat 10 Installation
 - **Done:** Downloaded the Red Hat Enterprise Linux 10 ISO and attempted to create a first virtual machine on Proxmox VE using the command line
 - **Broken:** VM failed to start due to an incompatible CPU configuration. The default KVM CPU type was not compatible with Red Hat 10
