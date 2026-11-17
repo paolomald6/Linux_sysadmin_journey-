@@ -12,6 +12,7 @@ Create a RHEL 10 virtual machine on Proxmox VE.
 4. Checked the VM configuration using `qm config 300`.
 5. Started the VM using `qm start 300`.
 6. Opened the VM console through the Proxmox web interface.
+7. Configure the other settings using `qm set 300`.
 
 ## Choices made
 - CPU type: `x86-64-v3`
