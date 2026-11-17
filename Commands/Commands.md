@@ -45,7 +45,6 @@
 - Example: `ss -tlnp | grep 8006` checks that the Proxmox web interface is listening
 
 ## File download and verification
-
 ### wget: download a file from a URL
 `wget 'URL'`
 - Option `-O`: save the download with a specific filename
@@ -59,19 +58,23 @@
 `pveversion`
 ### qm create: create a virtual machine
 `qm create 300 --name "RHEL10-1" --memory 4096 -ide0 local-lvm:4 -net0 e1000 -cdrom local:iso/rhel-10.3-x86_64-dvd.iso`
-
+- Option `--scsihw virtio-scsi-pci`: SCSI controller type (virtio, faster in a VM)
+- Option `--scsi0 local-lvm:25`: 25 GB disk on the SCSI bus, stored on local-lvm
+- Option `-net0 virtio,bridge=vmbr0`: network card (virtio model) connected to the bridge vmbr0
 ### qm config: display a virtual machine configuration
 `qm config 300`
-
 ### qm list: list virtual machines
 `qm list`
-
 ### qm start: start a virtual machine
 `qm start 300`
-
 ### cat: display a virtual machine configuration file
 `cat /etc/pve/qemu-server/300.conf`
-
 ### qm destroy: delete a virtual machine
 `qm destroy 300 --purge`
 - Option `--purge`: also remove associated configuration and references
+
+## Red Hat subscription
+### subscription-manager status: show the subscription status of the system
+`sudo subscription-manager status`
+### subscription-manager register: register the system with a Red Hat account
+`sudo subscription-manager register`
