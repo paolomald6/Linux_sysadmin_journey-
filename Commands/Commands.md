@@ -61,6 +61,8 @@
 - Option `--scsihw virtio-scsi-pci`: SCSI controller type (virtio, faster in a VM)
 - Option `--scsi0 local-lvm:25`: 25 GB disk on the SCSI bus, stored on local-lvm
 - Option `-net0 virtio,bridge=vmbr0`: network card (virtio model) connected to the bridge vmbr0
+- Option `--cores 2`: number of CPU cores
+- Option `--arch x86_64`: CPU architecture of the VM
 ### qm config: display a virtual machine configuration
 `qm config 300`
 ### qm list: list virtual machines
@@ -78,3 +80,8 @@
 `sudo subscription-manager status`
 ### subscription-manager register: register the system with a Red Hat account
 `sudo subscription-manager register`
+
+## Users and permissions
+### adduser: create a user, or add an existing user to a group
+`adduser username`
+- Example: `adduser basile sudo` adds the existing user basile to the sudo group
