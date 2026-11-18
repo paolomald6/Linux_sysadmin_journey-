@@ -1,4 +1,9 @@
-
+## 2026-11-18 · Session S5: Debian VM Installation, SSH Troubleshooting & Git Fundamentals
+- **Done:** Created a new Debian VM on proxmox and installed Debian without a graphical interface, keeping the installation minimal (No GUI). Studied Git fundamentals. Installed `sudo` on Debian and configured sudo privileges for the user account.
+- **Broken:** Could not connect to the Debian VM through SSH due to an incorrect password. The noVNC console was not registering Caps Lock correctly, resulting in a password being entered without uppercase letters.
+- **Fixed:** Identified the noVNC keyboard issue as the root cause. Aftewards I changed all my password, root and user to add the uppercases (for security purposes).
+- **Learned:** How to install a minimal Debian system without a desktop environment, troubleshoot SSH authentication issues, understand the differences Git and GitHub fundementals.
+- 
 ## 2026-11-17 · Session S4: Proxmox VM Configuration & Red Hat 10 Installation
 - **Done:** Deleted and recreated the virtual machine to improve the `qm create` command, configured CPU cores, network bridge, virtual disk using VirtIO, and set the CPU type to `x86-64-v3`. Installed Red Hat Enterprise Linux 10 and registered the system with Red Hat Subscription Manager. Downloaded the Debian ISO for the next virtual machine (wget)
 - **Broken:** The initial VM creation commands I used yesterday, did not configure all the required parameters correctly, making it necessary for me to check on the GUI to get the VM running.
