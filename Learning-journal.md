@@ -1,7 +1,7 @@
 ## 2026-11-20 · Session S7: Ubuntu VM & Proxmox SSH Security Hardening
 - **Done:** Created a new Ubuntu VM to follow the Linux Upskill Challenge. Hardened Proxmox SSH access by creating a dedicated administrative user, disabling root SSH login, and configuring restricted sudo privileges for specific administrative tasks such as system updates and log inspection.
 - **Broken:** Had difficulty understanding some of the commands and aliases defined in the custom `sudoers` configuration, particularly how they restricted the user's administrative permissions.
-- **Fixed:** Researched and analyzed the commands and sudoers aliases to understand their purpose and the exact scope of permissions granted to the new administrative user.
+- **Fixed:** Researched and analyzed the commands and sudoers aliases to understand their purpose and the exact scope of permissions granted to the new administrative user. Corrected the aliases in `/etc/sudoers` by replacing (`-`) with underscores (`_`), with (`-`) the alias were not recognised `Cmnd_Alias`
 - **Learned:** How to create and manage Linux groups, assign users to groups, integrate group-based permissions with SSH and sudoers, configure restricted administrative privileges, and apply security practices commonly used in enterprise Linux environments.
 **Reference:**[Proxmox Security Series – Securing Root Access](https://dev.to/sebos/proxmox-security-seriessecuring-root-access-190e)
   
