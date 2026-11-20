@@ -85,3 +85,27 @@
 ### adduser: create a user, or add an existing user to a group
 `adduser username`
 - Example: `adduser basile sudo` adds the existing user basile to the sudo group
+- Option `--home`: set the home directory path
+- Example: `adduser --home /home/basile basile` creates the user basile with /home/basile as home directory
+### passwd: change a password, or lock/unlock an account
+`passwd username`
+- Option `-l`: lock the account (password login disabled)
+- Option `-u`: unlock the account
+- Option `-S`: show the status (L = locked, P = usable password)
+- Example: `sudo passwd -l root` locks the root password
+### addgroup: create a group
+`sudo addgroup ssh-users`
+### gpasswd: manage group members
+`sudo gpasswd --add basile ssh-users`
+- Option `--add`: add a user to a group
+
+## Configuration files
+### /etc/sudoers: define who can run which commands with sudo
+`sudo visudo`
+- `User_Alias NAME = %group`: alias for a group of users (`%` = system group)
+- `Cmnd_Alias NAME = cmd1, cmd2`: alias for a list of allowed commands (full paths)
+- Example: `SYSTEM_ADMIN ALL=(ALL) NOPASSWD: UPDATE_CMDS, LOG_CMDS, RVIM` lets the group run these command lists without a password
+
+### /etc/ssh/sshd_config: SSH server configuration
+`sudo nano /etc/ssh/sshd_config`
+- Option `AllowGroups ssh-users`: only members of this group can log in over SSH
