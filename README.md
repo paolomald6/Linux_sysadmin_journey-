@@ -1,7 +1,6 @@
 # Linux SysAdmin Journey
 
 Documenting my path to Linux system administrator.
-Start date: 14 November 2026. Target: RHCSA (EX200) by April 2027.
 
 **Start date:** 14 November 2026
 
