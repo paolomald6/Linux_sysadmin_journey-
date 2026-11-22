@@ -1,3 +1,9 @@
+## 2026-11-22 · Session S8: Git fundamentals and GitHub SSH authentication
+- **Done:** Configured Git on the Debian VM and cloned the repository. Tested `clone`, `push`, `pull`, `fetch` and `diff`. Edited repository files from Debian and pushed the changes to GitHub. Set up SSH key authentication so Git can connect to GitHub without a password.
+- **Broken:** Confused the local repository with the remote one, and the different names given to branches.
+- **Fixed:** Read the Git documentation and watched tutorials, then tried each command on the repository to see what it changed.
+- **Learned:** `git clone` copies a remote repository to the local machine. `git push` sends local commits to the remote. `git pull` fetches remote changes and integrates them. `git fetch` only downloads them, without changing my files. `git diff` shows the differences between file versions. For GitHub SSH authentication, rather similar to what I did last week for Proxmox SSH.
+
 ## 2026-11-20 · Session S7: Ubuntu VM & Proxmox SSH Security Hardening
 - **Done:** Created a new Ubuntu VM to follow the Linux Upskill Challenge. Hardened Proxmox SSH access by creating a dedicated administrative user, disabling root SSH login, and configuring restricted sudo privileges for specific administrative tasks such as system updates and log inspection.
 - **Broken:** Had difficulty understanding some of the commands and aliases defined in the custom `sudoers` configuration, particularly how they restricted the user's administrative permissions.

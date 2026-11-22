@@ -109,3 +109,45 @@
 ### /etc/ssh/sshd_config: SSH server configuration
 `sudo nano /etc/ssh/sshd_config`
 - Option `AllowGroups ssh-users`: only members of this group can log in over SSH
+## SSH
+### ssh-keygen: generate an SSH key pair
+`ssh-keygen`
+- Option `-t`: key type (ed25519 is the modern default)
+_ Option `-C`: Add a comment to the public key, to identify it
+- Example: `ssh-keygen -C "Debian" -t ed25519` creates a private key and a `.pub` 
+public key in `~/.ssh/`
+
+### ssh-copy-id: install your public key on a remote server
+`ssh-copy-id <username>@<server-ip>`
+- Option `-i`: choose which public key to copy
+- Example: `ssh-copy-id -i ~/.ssh/id_ed25519.pub <username>@<server-ip>`
+
+## Git
+### git config: set your Git identity
+`git config user.name "<your-name>"`
+`git config user.email "<your-email>"`
+- Option `--global`: apply to all repositories instead of the current one
+
+### git status: show modified files and what is staged
+`git status`
+
+### git diff: show changes not yet staged
+`git diff`
+- Option `--staged`: show changes already staged for the next commit
+
+### git add: stage files for the next commit
+`git add <file>`
+- Example: `git add .` stages all changes in the current folder
+
+### git commit: save the staged changes with a message
+`git commit -m "<message>"`
+- Option `-m`: commit message
+
+### git fetch: download remote changes without merging them
+`git fetch`
+
+### git pull: download remote changes and merge them
+`git pull`
+
+### git push: send your local commits to the remote repository
+`git push`
