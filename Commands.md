@@ -57,20 +57,20 @@
 ### pveversion: installed Proxmox VE version
 `pveversion`
 ### qm create: create a virtual machine
-`qm create 300 --name "RHEL10-1" --memory 4096 -ide0 local-lvm:4 -net0 e1000 -cdrom local:iso/rhel-10.3-x86_64-dvd.iso`
+`qm create <vmid> --name "RHEL10-1" --memory 4096 --cores 2 --arch x86_64 --scsihw virtio-scsi-pci --scsi0 local-lvm:25 -net0 virtio,bridge=vmbr0 -cdrom local:iso/rhel-10.3-x86_64-dvd.iso`
 - Option `--scsihw virtio-scsi-pci`: SCSI controller type (virtio, faster in a VM)
 - Option `--scsi0 local-lvm:25`: 25 GB disk on the SCSI bus, stored on local-lvm
 - Option `-net0 virtio,bridge=vmbr0`: network card (virtio model) connected to the bridge vmbr0
 - Option `--cores 2`: number of CPU cores
 - Option `--arch x86_64`: CPU architecture of the VM
 ### qm config: display a virtual machine configuration
-`qm config 300`
+`qm config <vmid>`
 ### qm list: list virtual machines
 `qm list`
 ### qm start: start a virtual machine
-`qm start 300`
+`qm start <vmid>`
 ### cat: display a virtual machine configuration file
-`cat /etc/pve/qemu-server/300.conf`
+`cat /etc/pve/qemu-server/<vmid>.conf`
 ### qm destroy: delete a virtual machine
 `qm destroy 300 --purge`
 - Option `--purge`: also remove associated configuration and references
@@ -84,9 +84,9 @@
 ## Users and permissions
 ### adduser: create a user, or add an existing user to a group
 `adduser username`
-- Example: `adduser basile sudo` adds the existing user basile to the sudo group
+- Example: `adduser sylvie sudo` adds the existing user sylvie to the sudo group
 - Option `--home`: set the home directory path
-- Example: `adduser --home /home/basile basile` creates the user basile with /home/basile as home directory
+- Example: `adduser --home /home/sylvie sylvie` creates the user sylvie with /home/sylvie as home directory
 ### passwd: change a password, or lock/unlock an account
 `passwd username`
 - Option `-l`: lock the account (password login disabled)
@@ -96,7 +96,7 @@
 ### addgroup: create a group
 `sudo addgroup ssh-users`
 ### gpasswd: manage group members
-`sudo gpasswd --add basile ssh-users`
+`sudo gpasswd --add sylvie ssh-users`
 - Option `--add`: add a user to a group
 
 ## Configuration files
