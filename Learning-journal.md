@@ -42,7 +42,7 @@
 - **Learned:** `dd` writes an ISO byte for byte to a device and erases it, so the device name must be checked with `lsblk` first. The Proxmox web interface is served by `pveproxy` on port 8006.
 
 ## 2026-11-14 · Session S1: Lab Hardware Inventory & Git Setup
-- **Done:** Checked the hardware specifications of each lab machine, created the Git repository, created the Hardware Overview directory, and documented the hardware specifications in 01-physical-machines.md
+- **Done:** Checked the hardware specifications of each lab machine, created the GitHub repository, created the Hardware Overview directory, and documented the hardware specifications in 01-physical-machines.md
 - **Broken:** Nothing
 - **Fixed:** Nothing
-- **Learned:** `lscpu`, `free -h`, `lsblk`, `df -h` and `lshw` show a machine's CPU, RAM, disks, free space and full hardware list. A Git repository lives on GitHub and files are pushed to it from the machine.
+- **Learned:** `lscpu`, `free -h`, `lsblk`, `df -h` and `lshw` show a machine's CPU, RAM, disks, free space and full hardware list. Repository on GitHub.
