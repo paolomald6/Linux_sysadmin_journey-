@@ -1,3 +1,10 @@
+## 2026-11-23 · Session S9: SSH access for a new user and first systemd timer
+- **Done:** Created a test user with `adduser`, a group with `addgroup`, and added my users to it with `gpasswd -a`. Added `AllowGroups <group>` to the SSH configuration, copied `authorized_keys` to the new user with `cp -p`, and logged in over SSH as that user. Wrote my first systemd service and timer (`hello.service`, `hello.timer`) that log "SSH is working" every 10 seconds, and I followed the output with `tail -f`.
+- **Broken:** The new user could not log in with the copied public key because the file was not owned by him. The timer also fired every minute instead of every 10 seconds.
+- **Fixed:** Changed the ownership with `chown test:<group> .ssh/authorized_keys`. After running `systemctl enable` on the timer, it ran every 10 seconds. I have not yet confirmed why it fired every minute before.
+- **Learned:** With public-key-only SSH, the user's `~/.ssh/authorized_keys` must belong to that user. `cp -p` keeps the original owner, so the copied file needed a `chown`. `AllowGroups` limits SSH login to members of the listed groups. In systemd, the `.timer` file defines the timing and the `.service` file defines the commands to run.
+- **To explore:** Why did the timer fire every minute before `systemctl enable`?
+
 ## 2026-11-22 · Session S8: Git fundamentals and GitHub SSH authentication
 - **Done:** Configured Git on the Debian VM and cloned the repository. Tested `clone`, `push`, `pull`, `fetch` and `diff`. Edited repository files from Debian and pushed the changes to GitHub. Set up SSH key authentication so Git can connect to GitHub without a password.
 - **Broken:** Confused the local repository with the remote one, and the different names given to branches.
