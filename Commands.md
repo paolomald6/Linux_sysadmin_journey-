@@ -83,10 +83,10 @@
 
 ## Users and permissions
 ### adduser: create a user, or add an existing user to a group
-`adduser username`
-- Example: `adduser sylvie sudo` adds the existing user sylvie to the sudo group
+`adduser <username>`
 - Option `--home`: set the home directory path
-- Example: `adduser --home /home/sylvie sylvie` creates the user sylvie with /home/sylvie as home directory
+- Example: `adduser --home /home/<username> <username>` creates the user with a custom home directory
+- Example: `adduser <username> <groupname>` adds the existing user to a group
 ### passwd: change a password, or lock/unlock an account
 `passwd username`
 - Option `-l`: lock the account (password login disabled)
@@ -94,10 +94,21 @@
 - Option `-S`: show the status (L = locked, P = usable password)
 - Example: `sudo passwd -l root` locks the root password
 ### addgroup: create a group
-`sudo addgroup ssh-users`
+`sudo addgroup <groupname>`
 ### gpasswd: manage group members
-`sudo gpasswd --add sylvie ssh-users`
-- Option `--add`: add a user to a group
+`sudo gpasswd --add <username> <groupname>`
+- Option `--add` (or `-a`): add a user to a group
+- Option `-M`: set the full member list, replacing the current members
+- Example: `sudo gpasswd -M <usera>,<userb> <groupname>`
+### deluser: delete a user
+`sudo deluser <username>`
+- Option `--remove-home`: also delete the user's home directory (files are lost)
+- Example: `sudo deluser --remove-home <username>`
+### delgroup: delete a group
+`sudo delgroup <groupname>`
+### chown: change the owner and group of a file
+`sudo chown <user>:<group> <file>`
+- Example: `sudo chown <username>:<groupname> .ssh/authorized_keys` gives the file to this user and group
 
 ## Configuration files
 ### /etc/sudoers: define who can run which commands with sudo
@@ -127,27 +138,49 @@ public key in `~/.ssh/`
 `git config user.name "<your-name>"`
 `git config user.email "<your-email>"`
 - Option `--global`: apply to all repositories instead of the current one
-
 ### git status: show modified files and what is staged
 `git status`
-
 ### git diff: show changes not yet staged
 `git diff`
 - Option `--staged`: show changes already staged for the next commit
-
 ### git add: stage files for the next commit
 `git add <file>`
 - Example: `git add .` stages all changes in the current folder
-
 ### git commit: save the staged changes with a message
 `git commit -m "<message>"`
 - Option `-m`: commit message
-
 ### git fetch: download remote changes without merging them
 `git fetch`
-
 ### git pull: download remote changes and merge them
 `git pull`
-
 ### git push: send your local commits to the remote repository
 `git push`
+
+## Files
+### cp: copy files or folders
+`cp <source> <destination>`
+- Option `-p`: preserve permissions, timestamps and (as root) the owner
+- Example: `sudo cp -p /home/<username>/.ssh/authorized_keys /home/<newuser>/.ssh/` copies the SSH authorized keys to another user
+- 
+## systemd
+### /etc/systemd/system/: custom service and timer files
+`sudo nano /etc/systemd/system/hello.service`
+`sudo nano /etc/systemd/system/hello.timer`
+- `.service`: defines what to run
+- `.timer`: defines when to run it
+### systemctl daemon-reload: reload systemd after creating or editing a unit file
+`sudo systemctl daemon-reload`
+### systemctl enable: start a unit automatically at boot
+`sudo systemctl enable <unit>`
+- Option `--now`: also start it immediately
+- Example: `sudo systemctl enable --now hello.timer`
+### systemctl disable: stop starting a unit at boot
+`sudo systemctl disable <unit>`
+- Option `--now`: also stop it immediately
+- Example: `sudo systemctl disable --now ssh-monitor.timer`
+
+##Logs
+### tail: show the end of a file
+`tail <file>`
+- Option `-f`: follow, keep displaying new lines as they are added
+- Example: `tail -f /var/log/auth.log` watches SSH login attempts live
