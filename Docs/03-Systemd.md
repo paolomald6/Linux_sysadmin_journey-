@@ -12,7 +12,8 @@ Write my first systemd service - The service write a log every 10s
 - `touch hello.service` (manages the service itself)
 - `touch hello.timer` (manages the re-occurence)
 
-2. hello.service config :
+2. hello.service config : 
+```
 [Unit]
 # Description of the service
 Description=Log a note every 10 seconds in /var/log/monitor.ssh
@@ -25,8 +26,9 @@ After=ssh.service
 Type=oneshot
 # Write a message to the log file
 ExecStart=/bin/sh -c '/usr/bin/echo "SSH is working" >> /var/log/monitor.ssh'
-
+```
 3. hello.timer config :
+```
 [Unit]
 Description=Execution every 10 seconds
 [Timer]
@@ -41,7 +43,7 @@ Unit=hello.service
 [Install]
 # Start the timer automatically at boot
 WantedBy=timers.target
-
+```
 5. Reload the deamon for systemd to use it `sudo systemctl daemon-reload`
 6. Enable and start hello.timer  `sudo systemctl enable --now hello.service`
 7. Start the service manually for testing `sudo systemctl start hello.service`
