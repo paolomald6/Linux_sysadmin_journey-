@@ -1,3 +1,11 @@
+## 2026-11-24 · Session S10: QEMU guest agent and systemd service dependency
+- **Done:** Wrote the documentation for my first systemd service (`Docs/03-Systemd.md`). Fixed syntax mistakes in `hello.service` and added `Requisite=sshd.service` and `After=sshd.service`, so the service that writes "SSH is working" to a log file every 10 seconds only runs when SSH is already up. Installed and enabled the QEMU guest agent in a VM, then queried its network interfaces from the Proxmox shell with `qm agent`.
+- **Broken:** The guest agent did not work from Proxmox: I had installed it in the VM but had not enabled it in the VM's Proxmox configuration.
+- **Fixed:** Enabled the agent in the VM options with `qm set <VMID> --agent 1`. After that, `qm agent <VMID> network-get-interfaces` returned the VM's network interfaces.
+- **Learned:** The QEMU guest agent runs inside the VM and lets Proxmox talk to it directly, without SSH. It must be installed in the VM and enabled in the VM's Proxmox configuration; installing it alone on VM is not enough. In a systemd unit, `Requisite=` makes a service depend on another one, and `After=` sets the start order.
+- **To explore:** Which other `qm agent` commands exist ? Does enabling the agent option require a full stop and start of the VM?
+- **Reference:** [Docs/03-Systemd.md](Docs/03-Systemd.md)
+
 ## 2026-11-23 · Session S9: SSH access for a new user and first systemd timer
 - **Done:** Created a test user with `adduser`, a group with `addgroup`, and added my users to it with `gpasswd -a`. Added `AllowGroups <group>` to the SSH configuration, copied `authorized_keys` to the new user with `cp -p`, and logged in over SSH as that user. Wrote my first systemd service and timer (`hello.service`, `hello.timer`) that log "SSH is working" every 10 seconds, and I followed the output with `tail -f`.
 - **Broken:** The new user could not log in with the copied public key because the file was not owned by him. The timer also fired every minute instead of every 10 seconds.

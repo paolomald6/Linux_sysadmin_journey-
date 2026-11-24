@@ -65,6 +65,11 @@
 - Option `--arch x86_64`: CPU architecture of the VM
 ### qm config: display a virtual machine configuration
 `qm config <vmid>`
+### qm set: change the configuration of an existing virtual machine
+`qm set <vmid> --cores 2`
+- Option `--cores`: number of CPU cores
+- Option `--agent 1`: enable the QEMU guest agent for the VM (the VM must be fully stopped and started again to apply it)
+- Example: `qm set <vmid> --agent 1`
 ### qm list: list virtual machines
 `qm list`
 ### qm start: start a virtual machine
@@ -74,6 +79,9 @@
 ### qm destroy: delete a virtual machine
 `qm destroy 300 --purge`
 - Option `--purge`: also remove associated configuration and references
+### qm agent: send a command to the QEMU guest agent inside a VM
+`qm agent <vmid> <command>`
+- Example: `qm agent <vmid> network-get-interfaces` lists the VM's network interfaces and IP addresses (the agent must be running in the VM)
 
 ## Red Hat subscription
 ### subscription-manager status: show the subscription status of the system
