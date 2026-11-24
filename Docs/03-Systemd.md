@@ -1,7 +1,7 @@
 ## Systemd first service 
 
 ## Goal
-Write my first systemd service - The service write a log every 10s
+Write my first systemd service - Check if sshd.service runs and if so writes a log every 10s
 
 ## Environment
 - Debian VM 
