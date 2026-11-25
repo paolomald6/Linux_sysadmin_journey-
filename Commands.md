@@ -44,14 +44,14 @@
 - Option `-p`: show the process using each port
 - Example: `ss -tlnp | grep 8006` checks that the Proxmox web interface is listening
 
-## File download and verification
-### wget: download a file from a URL
+##  download and verification
+### wget: download a  from a URL
 `wget 'URL'`
-- Option `-O`: save the download with a specific filename
-- Example: `wget -O rhel-10.3-x86_64-dvd.iso 'URL'` downloads the ISO with a custom filename
+- Option `-O`: save the download with a specific name
+- Example: `wget -O rhel-10.3-x86_64-dvd.iso 'URL'` downloads the ISO with a custom name
 
 ### sha256sum: calculate or verify SHA-256 checksums
-`sha256sum file.iso`
+`sha256sum .iso`
 
 ## Proxmox
 ### pveversion: installed Proxmox VE version
@@ -74,7 +74,7 @@
 `qm list`
 ### qm start: start a virtual machine
 `qm start <vmid>`
-### cat: display a virtual machine configuration file
+### cat: display a virtual machine configuration 
 `cat /etc/pve/qemu-server/<vmid>.conf`
 ### qm destroy: delete a virtual machine
 `qm destroy 300 --purge`
@@ -110,15 +110,15 @@
 - Example: `sudo gpasswd -M <usera>,<userb> <groupname>`
 ### deluser: delete a user
 `sudo deluser <username>`
-- Option `--remove-home`: also delete the user's home directory (files are lost)
+- Option `--remove-home`: also delete the user's home directory (s are lost)
 - Example: `sudo deluser --remove-home <username>`
 ### delgroup: delete a group
 `sudo delgroup <groupname>`
-### chown: change the owner and group of a file
-`sudo chown <user>:<group> <file>`
-- Example: `sudo chown <username>:<groupname> .ssh/authorized_keys` gives the file to this user and group
+### chown: change the owner and group of a 
+`sudo chown <user>:<group> <>`
+- Example: `sudo chown <username>:<groupname> .ssh/authorized_keys` gives the  to this user and group
 
-## Configuration files
+## Configuration s
 ### /etc/sudoers: define who can run which commands with sudo
 `sudo visudo`
 - `User_Alias NAME = %group`: alias for a group of users (`%` = system group)
@@ -169,7 +169,11 @@ public key in `~/.ssh/`
 `cp <source> <destination>`
 - Option `-p`: preserve permissions, timestamps and (as root) the owner
 - Example: `sudo cp -p /home/<username>/.ssh/authorized_keys /home/<newuser>/.ssh/` copies the SSH authorized keys to another user
-- 
+### find: search for files and folders
+`find <path> -name "<filename>"`
+- Option `-name`: match the file name (case-sensitive, use `-iname` to ignore case)
+- Example: `find /etc -name "sshd_config"` looks for this file under /etc
+
 ## systemd
 ### /etc/systemd/system/: custom service and timer files
 `sudo nano /etc/systemd/system/hello.service`
@@ -186,9 +190,30 @@ public key in `~/.ssh/`
 `sudo systemctl disable <unit>`
 - Option `--now`: also stop it immediately
 - Example: `sudo systemctl disable --now ssh-monitor.timer`
+### systemctl get-default: show the default target (what the system boots into)
+`systemctl get-default`
+- Example: returns `graphical.target` (with desktop) or `multi-user.target` (text mode only)
+### systemctl set-default: change the default target for the next boots
+`sudo systemctl set-default <target>`
+- Example: `sudo systemctl set-default multi-user.target` boots in text mode, without the graphical interface
+### systemctl isolate: switch to a target right now
+`sudo systemctl isolate <target>`
+- Example: `sudo systemctl isolate multi-user.target` stops the graphical interface immediately, without rebooting
+### systemctl status: show the state of a unit and its latest logs
+`systemctl status <unit>`
+- Example: `systemctl status display-manager` checks if the graphical login manager is running
+### systemctl list-units: list the loaded units
+`systemctl list-units`
+- Option `--type`: filter by unit type (service, timer, target...)
+- Example: `sudo systemctl list-units --type target` lists the active targets
+### systemctl list-dependencies: show what a unit depends on
+`systemctl list-dependencies <unit>`
+- Example: `sudo systemctl list-dependencies graphical.target` shows everything started by the graphical target
 
 ##Logs
 ### tail: show the end of a file
 `tail <file>`
 - Option `-f`: follow, keep displaying new lines as they are added
 - Example: `tail -f /var/log/auth.log` watches SSH login attempts live
+### dmesg: kernel messages (hardware detection, drivers, boot errors)
+`sudo dmesg`
