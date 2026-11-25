@@ -1,3 +1,9 @@
+## 2026-11-25 · Session S11: systemd targets and unit dependencies
+- **Done:** Read part of the systemd chapter of Sébastien Rohaut's Linux administration book. On my VMs, tested `systemctl get-default`, `systemctl set-default multi-user.target`, `systemctl isolate multi-user.target`, `systemctl status display-manager`, `systemctl list-units --type target` and `systemctl list-dependencies`. Switched a machine from `graphical.target` to `multi-user.target` and looked at how targets depend on each other.
+- **Learned:** A target groups units and defines a state of the system. `multi-user.target` runs the system without a graphical interface, and `graphical.target` builds on it by adding the display manager. `systemctl get-default` shows the target used at boot, `set-default` changes it, and `isolate` switches the running system to another target immediately. `systemctl list-dependencies --all multi-user.target` shows the full tree of units behind a target. A service unit manages a process (start, stop) and can depend on targets or on other units, and `Requires=` and `After=` control what it needs and the order in which units start.
+- **To explore:** The other units of systemd, timers, sockets ...
+- **Reference:** Sébastien Rohaut, *Linux : maîtriser l'administration du système*, systemd chapter
+
 ## 2026-11-24 · Session S10: QEMU guest agent and systemd service dependency
 - **Done:** Wrote the documentation for my first systemd service (`Docs/03-Systemd.md`). Fixed syntax mistakes in `hello.service` and added `Requisite=sshd.service` and `After=sshd.service`, so the service that writes "SSH is working" to a log file every 10 seconds only runs when SSH is already up. Installed and enabled the QEMU guest agent in a VM, then queried its network interfaces from the Proxmox shell with `qm agent`.
 - **Broken:** The guest agent did not work from Proxmox: I had installed it in the VM but had not enabled it in the VM's Proxmox configuration.
