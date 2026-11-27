@@ -34,6 +34,11 @@
 - Option `bs=1M`: block size, copies 1 MB at a time (faster)
 - Option `conv=fdatasync`: flushes data to the device before exiting, so the USB is safe to remove
 - Example: `sudo dd bs=1M conv=fdatasync if=./proxmox-ve_*.iso of=/dev/XYZ` writes the Proxmox installer to a USB drive
+### mount: attach a disk or partition to a folder
+`sudo mount <device> <mount-point>`
+- Option `-m`: create the mount point folder if it doesn't exist
+### umount: detach a mounted disk or partition
+`sudo umount <device>`
 
 ## Network
 ### ss: open ports and network connections
@@ -44,14 +49,14 @@
 - Option `-p`: show the process using each port
 - Example: `ss -tlnp | grep 8006` checks that the Proxmox web interface is listening
 
-##  download and verification
-### wget: download a  from a URL
+## File download and verification
+### wget: download a file from a URL
 `wget 'URL'`
 - Option `-O`: save the download with a specific name
 - Example: `wget -O rhel-10.3-x86_64-dvd.iso 'URL'` downloads the ISO with a custom name
 
 ### sha256sum: calculate or verify SHA-256 checksums
-`sha256sum .iso`
+`sha256sum file.iso`
 
 ## Proxmox
 ### pveversion: installed Proxmox VE version
@@ -77,7 +82,7 @@
 ### cat: display a virtual machine configuration 
 `cat /etc/pve/qemu-server/<vmid>.conf`
 ### qm destroy: delete a virtual machine
-`qm destroy 300 --purge`
+`qm destroy <vmid> --purge`
 - Option `--purge`: also remove associated configuration and references
 ### qm agent: send a command to the QEMU guest agent inside a VM
 `qm agent <vmid> <command>`
@@ -96,7 +101,7 @@
 - Example: `adduser --home /home/<username> <username>` creates the user with a custom home directory
 - Example: `adduser <username> <groupname>` adds the existing user to a group
 ### passwd: change a password, or lock/unlock an account
-`passwd username`
+`passwd <username>`
 - Option `-l`: lock the account (password login disabled)
 - Option `-u`: unlock the account
 - Option `-S`: show the status (L = locked, P = usable password)
@@ -110,15 +115,15 @@
 - Example: `sudo gpasswd -M <usera>,<userb> <groupname>`
 ### deluser: delete a user
 `sudo deluser <username>`
-- Option `--remove-home`: also delete the user's home directory (s are lost)
+- Option `--remove-home`: also delete the user's home directory (files are lost)
 - Example: `sudo deluser --remove-home <username>`
 ### delgroup: delete a group
 `sudo delgroup <groupname>`
 ### chown: change the owner and group of a 
-`sudo chown <user>:<group> <>`
-- Example: `sudo chown <username>:<groupname> .ssh/authorized_keys` gives the  to this user and group
+`sudo chown <user>:<group> <file>`
+- Example: `sudo chown <username>:<groupname> .ssh/authorized_keys` gives the file to this user and group
 
-## Configuration s
+## Configuration files
 ### /etc/sudoers: define who can run which commands with sudo
 `sudo visudo`
 - `User_Alias NAME = %group`: alias for a group of users (`%` = system group)
@@ -128,13 +133,13 @@
 ### /etc/ssh/sshd_config: SSH server configuration
 `sudo nano /etc/ssh/sshd_config`
 - Option `AllowGroups ssh-users`: only members of this group can log in over SSH
+- 
 ## SSH
 ### ssh-keygen: generate an SSH key pair
 `ssh-keygen`
 - Option `-t`: key type (ed25519 is the modern default)
-_ Option `-C`: Add a comment to the public key, to identify it
-- Example: `ssh-keygen -C "Debian" -t ed25519` creates a private key and a `.pub` 
-public key in `~/.ssh/`
+- Option `-C`: Add a comment to the public key, to identify it
+- Example: `ssh-keygen -C "Debian" -t ed25519` creates a private key and a `.pub` public key in `~/.ssh/`
 
 ### ssh-copy-id: install your public key on a remote server
 `ssh-copy-id <username>@<server-ip>`
@@ -210,10 +215,20 @@ public key in `~/.ssh/`
 `systemctl list-dependencies <unit>`
 - Example: `sudo systemctl list-dependencies graphical.target` shows everything started by the graphical target
 
-##Logs
+## Logs
 ### tail: show the end of a file
 `tail <file>`
 - Option `-f`: follow, keep displaying new lines as they are added
 - Example: `tail -f /var/log/auth.log` watches SSH login attempts live
 ### dmesg: kernel messages (hardware detection, drivers, boot errors)
 `sudo dmesg`
+
+## Package management
+### apt install: install a package (.deb)
+`sudo apt install /path/<package.deb>`
+### apt remove: uninstall a package but keep its system configuration files
+`sudo apt remove <package>`
+### apt purge: uninstall a package AND delete its system configuration files
+`sudo apt purge <package>`
+### apt autoremove: remove automatically installed dependencies that are no longer needed
+`sudo apt autoremove`
